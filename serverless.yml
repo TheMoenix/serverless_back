@@ -1,0 +1,84 @@
+service: serverless-alshami
+frameworkVersion: "3"
+
+plugins:
+  - serverless-plugin-typescript
+
+provider:
+  name: aws
+  stage: dev
+  region: eu-central-1
+  runtime: nodejs18.x
+  environment:
+    LEDGER_NAME: AlshamiLedger
+    USERS_TABLE: Users
+    TRANSACTIONS_TABLE: Transactions
+    ACCOUNTS_TABLE: Accounts
+  iamRoleStatements:
+    - Effect: 'Allow'
+      Action:
+        - 'qldb:*'
+      Resource: "arn:aws:qldb:${self:provider.region}:*:ledger/${self:provider.environment.LEDGER_NAME}"
+    - Effect: 'Allow'
+      Action:
+        - 'qldb:*'
+      Resource: "arn:aws:qldb:${self:provider.region}:*:ledger/${self:provider.environment.LEDGER_NAME}/*"
+    - Effect: "Allow"
+      Action:   
+        - "lambda:InvokeFunction"
+      Resource: "arn:aws:lambda:${self:provider.region}:*:function:*"
+      
+functions:
+  qldbInit:
+    handler: src/init.handler
+    events:
+      - http:
+          path: /init
+          method: post
+          cors: true
+  insertDocument:
+    handler: src/insertDocument.handler
+    events:
+      - http:
+          path: /{table}
+          method: post
+          cors: true
+          request:
+            parameters:
+              paths:
+                table: true  
+  getDocument:
+    handler: src/getDocument.handler
+    events:
+      - http:
+          path: /{table}
+          method: get
+          cors: true
+          request:
+            parameters:
+              paths:
+                table: true 
+      - http:
+          path: /{table}/history
+          method: get
+          cors: true
+          request:
+            parameters:
+              paths:
+                table: true   
+  executeAllTransactions:
+    handler: src/executeAllTransactions.handler  
+    events:
+      - http:
+          path: /execute
+          method: post
+          cors: true
+
+resources:
+  Resources:
+    AlshamiQldb:
+      Type: AWS::QLDB::Ledger
+      Properties: 
+        Name: ${self:provider.environment.LEDGER_NAME}
+        PermissionsMode: ALLOW_ALL
+

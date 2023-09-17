@@ -1,0 +1,11 @@
+{
+    "devDependencies": {
+        "serverless-plugin-typescript": "^2.1.5",
+        "typescript": "^5.2.2"
+    },
+    "dependencies": {
+        "amazon-qldb-driver-nodejs": "^3.0.1",
+        "aws-sdk": "^2.1457.0",
+        "ion-js": "^4.3.0"
+    }
+}
