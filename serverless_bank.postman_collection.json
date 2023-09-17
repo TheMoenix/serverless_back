@@ -1,0 +1,205 @@
+{
+	"info": {
+		"_postman_id": "96031467-c428-4467-845b-78d78c906d68",
+		"name": "Serverless QLDB Template",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "19323960"
+	},
+	"item": [
+		{
+			"name": "QLDB init",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "https://ubbapd1n8j.execute-api.eu-central-1.amazonaws.com/dev/init",
+					"protocol": "https",
+					"host": [
+						"ubbapd1n8j",
+						"execute-api",
+						"eu-central-1",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"dev",
+						"init"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Insert many documents accounts",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "[\n    {\n        \"balance\": 1500,\n        \"id\": 1020333\n    },\n    {\n        \"balance\": 1500,\n        \"id\": 1020444\n    }\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://ubbapd1n8j.execute-api.eu-central-1.amazonaws.com/dev/accounts",
+					"protocol": "https",
+					"host": [
+						"ubbapd1n8j",
+						"execute-api",
+						"eu-central-1",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"dev",
+						"accounts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "list documents",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://ubbapd1n8j.execute-api.eu-central-1.amazonaws.com/dev/accounts",
+					"protocol": "https",
+					"host": [
+						"ubbapd1n8j",
+						"execute-api",
+						"eu-central-1",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"dev",
+						"accounts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "list documents history",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://ubbapd1n8j.execute-api.eu-central-1.amazonaws.com/dev/accounts/history",
+					"protocol": "https",
+					"host": [
+						"ubbapd1n8j",
+						"execute-api",
+						"eu-central-1",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"dev",
+						"accounts",
+						"history"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Execute all transactions",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "https://ubbapd1n8j.execute-api.eu-central-1.amazonaws.com/dev/execute",
+					"protocol": "https",
+					"host": [
+						"ubbapd1n8j",
+						"execute-api",
+						"eu-central-1",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"dev",
+						"execute"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Insert many documents users",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "[\n    {\n        \"name\": \"Alshami\",\n        \"account\": 1020333\n    },\n    {\n        \"name\": \"Rayan\",\n        \"account\": 1020444\n    }\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://ubbapd1n8j.execute-api.eu-central-1.amazonaws.com/dev/users",
+					"protocol": "https",
+					"host": [
+						"ubbapd1n8j",
+						"execute-api",
+						"eu-central-1",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"dev",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Insert many documents transactions",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "[\n    {\n        \"type\": \"Transfer\",\n        \"sourceAccount\": 1020333,\n        \"destinationAccount\": 1020444,\n        \"amount\": 500\n    },\n    {\n        \"type\": \"Withdrow\",\n        \"sourceAccount\": 1020333,\n        \"amount\": 500\n    }\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://ubbapd1n8j.execute-api.eu-central-1.amazonaws.com/dev/transactions",
+					"protocol": "https",
+					"host": [
+						"ubbapd1n8j",
+						"execute-api",
+						"eu-central-1",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"dev",
+						"transactions"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "table",
+			"value": "{table}"
+		}
+	]
+}
